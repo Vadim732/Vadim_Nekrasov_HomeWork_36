@@ -1,0 +1,48 @@
+1 Задание.
+
+SELECT 
+    p.product AS product_name,
+    DATE_FORMAT(a.action_date, '%Y-%m-%d') AS delivery_date,
+    a.qty AS quantity,
+    (a.qty * a.price) AS total_price
+FROM 
+    Actions a
+INNER JOIN Products p ON a.product_id = p.id
+INNER JOIN Categories c ON p.category_id = c.id
+WHERE 
+    c.category = 'Monitors'
+    AND YEAR(a.action_date) < 2017
+ORDER BY 
+    a.qty DESC
+LIMIT 5;
+
+
+
+2 Задание.
+
+SELECT 
+    p.product,
+    s.supplier,
+    a.action_date,
+    a.qty,
+    a.price
+FROM 
+    Actions a
+JOIN 
+    Products p ON a.product_id = p.id
+JOIN 
+    Suppliers s ON a.supplier_id = s.id
+WHERE 
+    MONTH(a.action_date) = 1 
+    AND YEAR(a.action_date) = 2016
+ORDER BY 
+    a.action_date DESC;
+
+
+
+3 Задание.
+
+SELECT DISTINCT p.product
+FROM Actions a
+JOIN Products p ON a.product_id = p.id
+WHERE YEAR(a.action_date) = 2017;
